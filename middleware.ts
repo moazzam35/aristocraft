@@ -4,12 +4,12 @@ import { jwtVerify } from "jose";
 
 const COOKIE_NAME = "session_token";
 
-const ADMIN_ROUTES = ["/dashboard", "/admin", "/products", "/orders", "/users"];
+const ADMIN_ROUTES = ["/dashboard", "/admin", "/orders", "/users"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const isAdminRoute = ADMIN_ROUTES.some((route) => pathname.startsWith(route));
+  const isAdminRoute = ADMIN_ROUTES.some((route) => pathname.startsWith(route)) || pathname === "/products";
   if (!isAdminRoute) return NextResponse.next();
 
   const token = request.cookies.get(COOKIE_NAME)?.value;
@@ -30,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/products/:path*", "/orders/:path*", "/users/:path*"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/products", "/orders/:path*", "/users/:path*"],
 };
