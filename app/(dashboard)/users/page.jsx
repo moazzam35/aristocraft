@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ShieldIcon from "lucide-react/dist/esm/icons/shield";
-import ShieldOffIcon from "lucide-react/dist/esm/icons/shield-off";
+import ShieldBanIcon from "lucide-react/dist/esm/icons/shield-ban";
 import UserCogIcon from "lucide-react/dist/esm/icons/user-cog";
 import RefreshCwIcon from "lucide-react/dist/esm/icons/refresh-cw";
 import StarIcon from "lucide-react/dist/esm/icons/star";
@@ -245,7 +245,7 @@ export default function AdminUsersPage() {
                                     {isUpdating ? (
                                       <RefreshCwIcon size={10} className="animate-spin" />
                                     ) : (
-                                      <ShieldIconOff size={10} strokeWidth={2.5} />
+                                      <ShieldBanIcon size={10} strokeWidth={2.5} />
                                     )}
                                     Demote
                                   </button>

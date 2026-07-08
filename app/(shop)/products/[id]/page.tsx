@@ -8,8 +8,13 @@ import { ToastProvider } from "@/components/ui/toast";
 export async function generateMetadata(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
 
-  const product = await prisma.product.findUnique({
-    where: { id },
+  const product = await prisma.product.findFirst({
+    where: {
+      OR: [
+        { id },
+        { slug: id },
+      ],
+    },
   });
 
   if (!product) return {};
@@ -27,8 +32,13 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
 export default async function ProductDetailPage(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
 
-  const product = await prisma.product.findUnique({
-    where: { id },
+  const product = await prisma.product.findFirst({
+    where: {
+      OR: [
+        { id },
+        { slug: id },
+      ],
+    },
     include: {
       images: true,
       colors: true,
